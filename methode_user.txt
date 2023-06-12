@@ -102,3 +102,19 @@ Changer afin qu'on puisse demander utilisateur de remplir 2 fois de mdp lors d'i
                     ]),       
 
   *Changer l'affichage de formulaire dans register.html.twig                                           
+----------------------------------------------------------------------------------------------------
+#################################  LOGIN & LOGOUT ###########################################
+############################# php bin/console make:auth   ###################################
+#############################################################################################
+
+  php bin/console make:auth  
+
+  What style of authentication do you want? [Empty authenticator]:
+  [0] Empty authenticator
+  [1] Login form authenticator
+ > 1
+
+  The class name of the authenticator to create (e.g. AppCustomAuthenticator):
+ > LoginFormAuthenticator
+
+ ChoIsir SecurityController et generer un logout

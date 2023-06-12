@@ -28,10 +28,11 @@ php bin/console make:entity User
 
 #################################  FORM - Symfony 6.3 ##########################################
 ############################   CREATION DE FORMULAIRE ##########################################
+#########################  php bin/console make:registration-form ##############################
 ################################################################################################
 
 
-php bin/console make:registration -form
+php bin/console make:registration-form
     - automatiquement lié à utilisateur crée (User) et 
     - nous demandera si nous souhaitons ajouter une entité #[UniqueEntity] - yes
     *!!!Do you want to send an email to verify the user's email address after registration?
@@ -91,10 +92,13 @@ Changer afin qu'on puisse demander utilisateur de remplir 2 fois de mdp lors d'i
 
                 'invalid_message' =>'les mot de passes ne correspondent pas',    
 
-                 //***Regex à ajouter  (n'oublie pas d'importer la classe)   
-                    - après new Length  
+//***Regex à ajouter  (n'oublie pas d'importer la classe)   
+     - après new Length  
+
                  new Regex([
                         'pattern' => '/^(?=.*[a-z])(?=.*\d)(?=.*[@$!%#*?&])[A-Za-z\d@$!%#*?&]{8,}$/',
                         'match' => true,
                         "message" => 'Votre mot de passe doit contenir au moins un chiffre, un caractère spécial (@$!#%*?&), une lettre minuscule et une lettre majuscule !'
-                    ]),                                
+                    ]),       
+
+  *Changer l'affichage de formulaire dans register.html.twig                                           

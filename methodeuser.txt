@@ -1,9 +1,0 @@
-php bin/console make:user
-    -choisir un nom user....User par défaut
-    -stocker user date dans le BDD
-    -choisir le propriété unique que l'on veut: email(Vincent)
-    -hash mdp
-                                |
-                                |
-                                V 
-                                

@@ -40,7 +40,7 @@ php bin/console make:registration-form
     -Choisir [13]Home
 
 
-Ajouter le reste de champs de formulaire car ils nous donne automatiquement (email + password + checkbox "agree to terms" uniquement). Une modification comme ci dessous:
+Ajouter le reste de champs de formulaire (dans controller) car ils nous donne automatiquement (email + password + checkbox "agree to terms" uniquement). Une modification comme ci dessous:
 
     $builder
             ->add('email')
@@ -118,3 +118,25 @@ Changer afin qu'on puisse demander utilisateur de remplir 2 fois de mdp lors d'i
  > LoginFormAuthenticator
 
  ChoIsir SecurityController et generer un logout
+
+Changer la route du fonction onAuthenticationSuccess dans LoginFormAuthenticator 
+  return new RedirectResponse($this->urlGenerator->generate('home'));
+
+---------------------------------------------------------------------------------------------
+
+  Relié comment au User
+
+  Supprimer ORM author et ses getter & setter
+   - On souhaite créer le propriété user et le remplacer
+
+  php bin/console make:entity Comment, 
+    - ajouter un propriété "user"
+    - relation à la classe User
+    - ManyToOne
+    - not allowed to be nullable
+    - yes to this function $user->getComments()
+
+ Avant de migrer, vider la table d'abord s'il y a des données   
+
+
+

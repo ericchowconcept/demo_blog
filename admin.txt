@@ -17,3 +17,5 @@ role_hierarchy:
          - { path: ^/admin, roles: ROLE_ADMIN }
          //*décommenter ceci dessus
         # - { path: ^/profile, roles: ROLE_USER }
+
+ access_denied_url: /   //*uniquement quand on est connecté       

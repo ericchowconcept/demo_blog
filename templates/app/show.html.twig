@@ -19,8 +19,30 @@
         </div>
         <a href="{{ path('edit_article', {id: article.id})}}" class="btn btn-warning">modifier</a>
     </article>
-
 </section>
+
+{# *Formulaire de commentaire #}
+<div class="container my-3">
+    {% if app.user %}
+    <h2 class="text-center">Ajouter un commentaire</h2>
+    {{ form_start(commentForm) }}
+
+        {{ form_row(commentForm.content, {
+            label : 'Votre commentaire'
+        }) }}
+        <button type="submit" class="btn btn-info">Envoyer</button>
+
+    {{ form_end(commentForm) }}
+    {% else %}
+    <p class="text-center">Pour ajouter un commentaire, 
+    <a href="{{ path('app_login') }}">{# *Formulaire de commentaire #}</a></p>    
+    {% endif %}
+    
+
+
+</div>
+
+{# *Affichage de commentaire #}
 <div class="container my-4">
    <h2 class="text-center">Commentaires</h2> 
     <section>
@@ -34,7 +56,7 @@
         <tbody>
         {% for comment in article.comments %}
             <tr>
-                <td>{{ comment.author }} <br> <small>{{ comment.createdAt|date('d/m/Y à H:i:s') }}</small></td>
+                <td>{{ comment.user.username }} <br> <small>{{ comment.createdAt|date('d/m/Y à H:i:s') }}</small></td>
                 <td>{{ comment.content }}</td>
             </tr>    
         {% endfor %}

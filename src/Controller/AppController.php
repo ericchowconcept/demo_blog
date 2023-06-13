@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Article;
+use App\Entity\Comment;
 use App\Form\ArticleType;
+use App\Form\CommentType;
 use App\Repository\ArticleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -29,14 +31,40 @@ class AppController extends AbstractController
     }
 
     #[Route("/blog/show/{id}", name: "blog_show")]
-    public function show(Article $article =null) :Response
+    public function show(Request $request, EntityManagerInterface $manager, Article $article =null) :Response
     {
+
         if($article == null)
         {
             return $this->redirectToRoute('home');
         }
+
+        if($this->getUser())
+        {
+            $user = $this->getUser();
+        }
+
+
+        $comment = new Comment;
+        $form = $this->createForm(CommentType::class, $comment);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid())
+        {
+            $comment->setCreatedAt(new \DateTime())
+                    ->setArticle($article)
+                    // ->setUser($this->getUser()) méthode alternative car on a fait extends AbstractController
+                    ->setUser($user);
+            $manager->persist($comment);
+            $manager->flush();
+
+            return $this->redirectToRoute('blog_show', ['id'=> $article->getId()]);
+        }
+
         return $this->render('app/show.html.twig', [
-            'article' => $article
+            'article' => $article,
+            'commentForm' => $form->createView()
         ]);
     }
 

@@ -18,4 +18,10 @@ role_hierarchy:
          //*décommenter ceci dessus
         # - { path: ^/profile, roles: ROLE_USER }
 
- access_denied_url: /   //*uniquement quand on est connecté       
+ access_denied_url: /   //*uniquement quand on est connecté
+
+
+############ TIPS    ########################
+
+ $colonnes = $manager->getClassMetadata(Article::class)->getFieldNames();
+        // * Pour récuperer tous les nom de colonnes       
